@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+
+	<bean id="sitesUsers_constraints-properties"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders">
+			<value>true</value>
+		</property>
+		<property name="locations">
+			<list>
+				<value>classpath:alfresco/extension/sitios-usuarios/*.properties
+				</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="webscript.alfresco.tutorials.listado.get"
+		class="pe.com.platformsample.SitesUsers" parent="webscript">
+
+		<property name="siteService" ref="SiteService"></property>
+	</bean>
+	
+	<bean id="webscript.alfresco.tutorials.resultado.post"
+		class="pe.com.platformsample.RespuestaSitios" parent="webscript">
+		<property name="siteService" ref="SiteService"></property>
+		<property name="nodeService" ref="NodeService"></property>
+		<property name="personService" ref="PersonService"></property>
+		<property name="fileFolderService" ref="FileFolderService"></property>
+		<property name="contentService" ref="ContentService"></property>
+		<property name="repository" ref="repositoryHelper" />
+		<property name="fileName" value="${FILE_NAME}" />
+		<property name="rutaReporte" value="${RUTA_REPORTE}"></property>
+	</bean>
+
+
+
+
+
+</beans>
